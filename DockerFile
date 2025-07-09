@@ -1,4 +1,4 @@
-FROM node24-alpine 
+FROM node:24-alpine
 
 WORKDIR /app
 
@@ -9,9 +9,13 @@ RUN npm install
 
 COPY . .
 
+ENV  DATABASE_URL="postgresql://postgres:mysecretpassword@localhost:5432/postgres?schema=public&connection_limit=5&sslmode=disable"
+
+
 RUN npx prisma migrate dev 
 RUN npx prisma generate
 
+EXPOSE 3000
 
-RUN npm run start
+CMD [ "npm" ,"start" ]
 
