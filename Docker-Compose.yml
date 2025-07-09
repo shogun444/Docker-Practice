@@ -1,0 +1,21 @@
+
+services:
+  postgres:
+    image: postgres
+    ports: 
+     - 5432:5432
+    environment:
+     - POSTGRES_PASSWORD=mysecretpassword
+  userproject:
+    build:
+     context: ./
+     dockerfile: dockerfile
+ 
+    environment:
+      - DATABASE_URL=postgresql://postgres:mysecretpassword@postgres:5432/postgres?schema=public&connection_limit=5&sslmode=disable
+    
+    ports : 
+      - 3000:3000
+  
+    depends_on:
+      - postgres

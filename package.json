@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc -b",
-    "start": " npx tsc -b && node ./dist/index.js"
+    "dev:docker": " npx prisma migrate dev  && npx tsc -b && node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
